@@ -1,0 +1,157 @@
+{
+  "generatedAt": "2026-11-11T20:44:10.853Z",
+  "pickRateNote": "pickRate = agent appearances / total appearances by sampled players",
+  "winRateNote": "winRate is null for agents with fewer than 20 appearances",
+  "sample": {
+    "players": 87,
+    "totalMatches": 435,
+    "matchesPerPlayer": 5,
+    "leaderboardRegion": "na"
+  },
+  "agentStats": {
+    "Clove": {
+      "picks": 77,
+      "pickRate": 17.7,
+      "wins": 42,
+      "winRate": 54.5
+    },
+    "Hush": {
+      "picks": 50,
+      "pickRate": 11.5,
+      "wins": 29,
+      "winRate": 58
+    },
+    "Chamber": {
+      "picks": 44,
+      "pickRate": 10.1,
+      "wins": 19,
+      "winRate": 43.2
+    },
+    "Fade": {
+      "picks": 37,
+      "pickRate": 8.5,
+      "wins": 22,
+      "winRate": 59.5
+    },
+    "Neon": {
+      "picks": 34,
+      "pickRate": 7.8,
+      "wins": 22,
+      "winRate": 64.7
+    },
+    "Phoenix": {
+      "picks": 30,
+      "pickRate": 6.9,
+      "wins": 22,
+      "winRate": 73.3
+    },
+    "Sova": {
+      "picks": 24,
+      "pickRate": 5.5,
+      "wins": 14,
+      "winRate": 58.3
+    },
+    "Waylay": {
+      "picks": 22,
+      "pickRate": 5.1,
+      "wins": 11,
+      "winRate": 50
+    },
+    "Iso": {
+      "picks": 21,
+      "pickRate": 4.8,
+      "wins": 14,
+      "winRate": 66.7
+    },
+    "Jett": {
+      "picks": 19,
+      "pickRate": 4.4,
+      "wins": 9,
+      "winRate": null
+    },
+    "Yoru": {
+      "picks": 16,
+      "pickRate": 3.7,
+      "wins": 11,
+      "winRate": null
+    },
+    "Raze": {
+      "picks": 13,
+      "pickRate": 3,
+      "wins": 8,
+      "winRate": null
+    },
+    "Skye": {
+      "picks": 8,
+      "pickRate": 1.8,
+      "wins": 4,
+      "winRate": null
+    },
+    "Cypher": {
+      "picks": 8,
+      "pickRate": 1.8,
+      "wins": 7,
+      "winRate": null
+    },
+    "Omen": {
+      "picks": 8,
+      "pickRate": 1.8,
+      "wins": 3,
+      "winRate": null
+    },
+    "Vyse": {
+      "picks": 7,
+      "pickRate": 1.6,
+      "wins": 6,
+      "winRate": null
+    },
+    "Reyna": {
+      "picks": 5,
+      "pickRate": 1.1,
+      "wins": 0,
+      "winRate": null
+    },
+    "Viper": {
+      "picks": 5,
+      "pickRate": 1.1,
+      "wins": 3,
+      "winRate": null
+    },
+    "Killjoy": {
+      "picks": 2,
+      "pickRate": 0.5,
+      "wins": 2,
+      "winRate": null
+    },
+    "Harbor": {
+      "picks": 1,
+      "pickRate": 0.2,
+      "wins": 0,
+      "winRate": null
+    },
+    "Sage": {
+      "picks": 1,
+      "pickRate": 0.2,
+      "wins": 1,
+      "winRate": null
+    },
+    "KAY/O": {
+      "picks": 1,
+      "pickRate": 0.2,
+      "wins": 1,
+      "winRate": null
+    },
+    "Deadlock": {
+      "picks": 1,
+      "pickRate": 0.2,
+      "wins": 1,
+      "winRate": null
+    },
+    "Astra": {
+      "picks": 1,
+      "pickRate": 0.2,
+      "wins": 0,
+      "winRate": null
+    }
+  }
+}
