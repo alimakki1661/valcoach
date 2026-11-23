@@ -41,7 +41,7 @@ export default function MetaPanel({ meta }) {
                 <tr key={r.agent}>
                   <td>{r.agent}</td>
                   <td>{r.cohortPickRate}% <span className="meta-apps">({r.cohortAppearances})</span></td>
-                  <td>{r.cohortWinRate !== null ? `${r.cohortWinRate}%` : <span className="meta-null">—</span>}</td>
+                  <td>{r.cohortWinRate !== null ? `${Math.round(r.cohortWinRate)}%` : <span className="meta-null">—</span>}</td>
                   <td>{r.playerGames}</td>
                   <td>{r.playerWinRate}%</td>
                 </tr>
@@ -68,8 +68,8 @@ export default function MetaPanel({ meta }) {
                 <tr key={r.agent}>
                   <td>{r.agent}</td>
                   <td>{r.cohortPickRate}% <span className="meta-apps">({r.cohortAppearances})</span></td>
-                  <td>{r.cohortWinRate !== null ? `${r.cohortWinRate}%` : <span className="meta-null">—</span>}</td>
-                  <td className="meta-muted">0–1</td>
+                  <td>{r.cohortWinRate !== null ? `${Math.round(r.cohortWinRate)}%` : <span className="meta-null">—</span>}</td>
+                  <td className="meta-muted">{r.playerGames}</td>
                 </tr>
               ))}
             </tbody>

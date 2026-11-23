@@ -26,6 +26,10 @@
  * GapRow:     { agent, cohortPickRate, cohortAppearances, cohortWinRate }
  * OffMetaRow: { agent, playerGames, playerWinRate, cohortPickRate }
  */
+// Mirrors the threshold used in fetchMeta.js — any agent below this pick count
+// gets cohortWinRate: null regardless of what is stored in meta.json.
+const WIN_RATE_MIN_PICKS = 20;
+
 export function computeMetaComparison(playerAggregates, meta) {
   if (!meta) return null;
 
@@ -48,7 +52,7 @@ export function computeMetaComparison(playerAggregates, meta) {
         agent,
         cohortPickRate:    pickRate,
         cohortAppearances: picks,
-        cohortWinRate:     winRate,       // may be null if below threshold
+        cohortWinRate:     picks >= WIN_RATE_MIN_PICKS ? winRate : null,
         playerGames:       p.games,
         playerWinRate:     p.winRate,
       };
@@ -61,7 +65,8 @@ export function computeMetaComparison(playerAggregates, meta) {
       agent,
       cohortPickRate:    pickRate,
       cohortAppearances: picks,
-      cohortWinRate:     winRate,
+      cohortWinRate:     picks >= WIN_RATE_MIN_PICKS ? winRate : null,
+      playerGames:       byAgent[agent]?.games ?? 0,
     }));
 
   // ── Off-meta strengths: 3+ games, WR > player baseline, cohort < 5% ──────
