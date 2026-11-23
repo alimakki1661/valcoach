@@ -6,8 +6,15 @@ import coachRouter from './routes/coach.js';
 import { loadMeta } from './services/metaStore.js';
 
 const app = express();
-app.use(cors());
+
+const allowedOrigin = process.env.ALLOWED_ORIGIN || 'http://localhost:5173';
+app.use(cors({ origin: allowedOrigin }));
+
 app.use(express.json());
+
+app.get('/health', (_req, res) => {
+  res.json({ status: 'ok', service: 'valcoach-backend' });
+});
 
 app.use('/api/matches', matchesRouter);
 app.use('/api/coach', coachRouter);

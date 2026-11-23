@@ -123,7 +123,7 @@ function buildMetaSection(mc) {
   if (mc.overlap.length) {
     lines.push('### Overlap (cohort top-8 agents the player has ≥2 games on)');
     for (const r of mc.overlap) {
-      const cohortWR = r.cohortWinRate !== null ? `${r.cohortWinRate}% WR` : 'WR N/A (<20 apps)';
+      const cohortWR = r.cohortWinRate !== null ? `${Math.round(r.cohortWinRate)}% WR` : 'WR N/A (<20 apps)';
       lines.push(`  ${r.agent}: cohort ${r.cohortPickRate}% pick (${r.cohortAppearances} apps), ${cohortWR} | player ${r.playerGames} games, ${r.playerWinRate}% WR`);
     }
   }
@@ -131,7 +131,7 @@ function buildMetaSection(mc) {
   if (mc.gaps.length) {
     lines.push('### Gaps (cohort top-8 agents the player has ≤1 game on)');
     for (const r of mc.gaps) {
-      const cohortWR = r.cohortWinRate !== null ? `${r.cohortWinRate}% WR` : 'WR N/A (<20 apps)';
+      const cohortWR = r.cohortWinRate !== null ? `${Math.round(r.cohortWinRate)}% WR` : 'WR N/A (<20 apps)';
       lines.push(`  ${r.agent}: cohort ${r.cohortPickRate}% pick (${r.cohortAppearances} apps), ${cohortWR}`);
     }
   }
@@ -168,14 +168,31 @@ export async function getCoachingReport(matches, aggregates, rank = null, metaCo
     ? `\n## Player rank\n  Tier: ${rank.tier}\n  RR: ${rank.rr}${rank.leaderboardRank ? `\n  Leaderboard: #${rank.leaderboardRank}` : ''}\n`
     : '';
 
+  // Rename hsPercent → "HS%" in the aggregates object sent to the LLM so the
+  // model never echoes the camelCase key name in prose.
+  function renameHsPercent(stats) {
+    const out = {};
+    for (const [key, val] of Object.entries(stats)) {
+      const { hsPercent, ...rest } = val;
+      out[key] = { ...rest, 'HS%': hsPercent };
+    }
+    return out;
+  }
+  const aggregatesForLLM = {
+    ...aggregates,
+    byAgent:    renameHsPercent(aggregates.byAgent   ?? {}),
+    byMap:      renameHsPercent(aggregates.byMap     ?? {}),
+    byAgentMap: renameHsPercent(aggregates.byAgentMap ?? {}),
+  };
+
   const userContent =
     `Total matches analysed: ${matches.length}\n` +
     rankSection +
     buildAgentRoleSection(matches) +
     buildMetaSection(metaComparison) +
-    `\n## Aggregated stats\n${JSON.stringify(aggregates, null, 2)}\n\n` +
+    `\n## Aggregated stats\n${JSON.stringify(aggregatesForLLM, null, 2)}\n\n` +
     `## Raw match log\n${JSON.stringify(
-      // Strip raw shot counts from the log — the LLM only needs hsPercent and the aggregates
+      // Strip raw shot counts from the log — the LLM only needs HS% and the aggregates
       matches.map(({ headshots, bodyshots, legshots, ...m }) => m),
       null, 2
     )}`;

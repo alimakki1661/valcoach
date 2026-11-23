@@ -18,18 +18,25 @@ export function computeAggregates(matches) {
   const mapBuckets    = {};
   const pairBuckets   = {};
 
+  let totalHeadshots = 0;
+  let totalShots     = 0;
+
   for (const m of matches) {
     accumulate(agentBuckets, m.agent, m);
     accumulate(mapBuckets, m.map, m);
     // Agent×map pair key: "Clove on Sunset"
     accumulatePair(pairBuckets, `${m.agent} on ${m.map}`, m);
+    // Accumulate for overall HS%
+    totalHeadshots += m.headshots ?? 0;
+    totalShots     += (m.headshots ?? 0) + (m.bodyshots ?? 0) + (m.legshots ?? 0);
   }
 
   const totalWins = matches.filter((m) => m.won).length;
 
   return {
-    totalMatches:   matches.length,
-    overallWinRate: matches.length > 0 ? round((totalWins / matches.length) * 100) : 0,
+    totalMatches:      matches.length,
+    overallWinRate:    matches.length > 0 ? round((totalWins / matches.length) * 100) : 0,
+    overallHsPercent:  totalShots > 0 ? round((totalHeadshots / totalShots) * 100) : 0,
     byAgent:    finalise(agentBuckets),
     byMap:      finalise(mapBuckets),
     byAgentMap: finalise(pairBuckets),
